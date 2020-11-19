@@ -1,0 +1,21 @@
+/* .containe {
+    padding-top: 50px;
+    border: 1px solid #cdcfd2;
+    margin-top: 50px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    font-size: 15px;
+    font-family: "Blackbaud Sans", "Helvetica Neue", "Arial", "sans-serif";
+}
+
+.row-footer {
+    padding: .5rem;
+    border: 1px solid #cdcfd2;
+    font-size: 15px;
+    font-family: "Blackbaud Sans", "Helvetica Neue", "Arial", "sans-serif";
+} */
+
+.form-width {
+    width: -webkit-fill-available;
+    padding-right: 30px;
+}

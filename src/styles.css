@@ -1,0 +1,20 @@
+.containe {
+    padding-top: 50px;
+    border: 1px solid #cdcfd2;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    font-size: 15px;
+    font-family: "Blackbaud Sans", "Helvetica Neue", "Arial", "sans-serif";
+}
+
+.row-footer {
+    padding: .5rem;
+    border: 1px solid #cdcfd2;
+    font-size: 15px;
+    font-family: "Blackbaud Sans", "Helvetica Neue", "Arial", "sans-serif";
+}
+
+.img-fluid {
+    width: 100%;
+  height: auto;
+}
