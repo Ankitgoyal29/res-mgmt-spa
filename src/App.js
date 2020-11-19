@@ -20,12 +20,6 @@ function App() {
           <NavMenu />
 
           <Switch>
-            {/* <Route exact component={Home} pattern="/" />
-            <Route exact component={Home} pattern="/home" />
-            <Route exact component={Hiring} pattern="/hiring" />
-            <Route exact component={ApplicationList} pattern="/applications" />
-            <Route exact component={Login} pattern="/login" /> */}
-
             <Route path="/home" exact > <Home /> </Route>
             <Route path="/hiring" exact > <Hiring /> </Route>
             <Route path="/applications" > <ApplicationList /> </Route>

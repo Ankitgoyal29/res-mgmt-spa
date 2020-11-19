@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { isLoggedInWatcher } from '../sagas/login-saga/loginSaga';
+import rootSaga from '../sagas/index';
 import reducer from './reducers/index';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(reducer, compose(applyMiddleware(sagaMiddleware)));
 
-sagaMiddleware.run(isLoggedInWatcher);
+sagaMiddleware.run(rootSaga);
 
 export default store;
