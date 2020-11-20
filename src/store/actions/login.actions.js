@@ -35,6 +35,7 @@ export function logIn(loginRequest) {
 }
 
 export function logInSucceeded(isUserLoggedIn) {
+    debugger;
     return {
         type: API_LOGIN_SUCCESS,
         isUserLoggedIn

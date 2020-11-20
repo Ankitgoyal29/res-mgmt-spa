@@ -8,17 +8,15 @@ import { connect } from 'react-redux';
 import { userLoggedInSelector } from '../../store/selectors/loginSelector';
 import { createStructuredSelector } from "reselect";
 
-// const mapStateToProps = state => {
-//     return {
-//         error: state.error,
-//         email: state.email,
-//         isUserLoggedIn: userLoggedInSelector(state)
-//     };
-// };
+const mapStateToProps = state => {
+    return {
+        isUserLoggedIn: state.loginReducer.isUserLoggedIn
+    };
+};
 
-const mapStateToProps = createStructuredSelector({
-    isUserLoggedIn: userLoggedInSelector
-});
+// const mapStateToProps = createStructuredSelector({
+//     isUserLoggedIn: userLoggedInSelector
+// });
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -28,9 +26,9 @@ const mapDispatchToProps = dispatch => {
 
 function Login(props) {
     const [login, setLogin] = useState({ email: '', password: '' });
-    const [showToast, setShowToast] = useState(false);
+    const [showToast, setShowToast] = useState(props.isUserLoggedIn);
     const [error] = useState();
-    console.log('login', props.isUserLoggedIn);
+    console.log('isUserLoggedIn', props.isUserLoggedIn);
     return (
         <Container>
             <Row>
@@ -49,7 +47,7 @@ function Login(props) {
                         </Form>
                     </Row>
                     <Row className="row-footer">
-                        <Button variant="primary" type="submit" onClick={() => { console.log('loginRequest', login); console.log('loginpost', props.logInPost); props.logInPost(login); }}>
+                        <Button variant="primary" type="submit" onClick={(e) => { e.preventDefault(); console.log('loginRequest', login); console.log('loginpost', props.logInPost); props.logInPost(login); }}>
                             Submit
                         </Button>
                         <Button variant="default">
@@ -58,10 +56,15 @@ function Login(props) {
                     </Row>
                 </Col>
             </Row>
-            {props.email ? <Toast onClose={() => setShowToast(!showToast)} show={showToast} animation={false}>
-                <Toast.Body>props.error</Toast.Body>
-            </Toast> : null}
+            <Row>
+                <Col>
+                    {props.isUserLoggedIn ? <Toast onClose={() => setShowToast(!showToast)} show={showToast} animation={false}>
+                        <Toast.Body>Login Success</Toast.Body>
+                    </Toast> : <p>Login Failed</p>}
+                </Col>
+            </Row>
         </Container>
+
     );
 }
 

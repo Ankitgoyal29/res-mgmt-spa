@@ -1,5 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import * as loginActions from '../../store/actions/login.actions';
+import axios from 'axios';
 
 const loginBaseUrl = 'http://localhost:8080/api/login';
 
@@ -24,6 +25,7 @@ function getIsUserLoggedIn(email) {
 function* isLoggedInWorker(action) {
     try {
         const isUserLoggedIn = action.email ? yield call(getIsUserLoggedIn(action.email)) : false;
+        debugger;
         yield put({ type: loginActions.API_IS_LOGGEDIN_SUCCESS, isUserLoggedIn })
     } catch (error) {
         yield put({ type: loginActions.API_IS_LOGGEDIN_FAILURE, error })
@@ -32,34 +34,27 @@ function* isLoggedInWorker(action) {
 
 
 export function* logInWatcher(action) {
+    debugger;
     yield takeLatest(loginActions.API_LOGIN_REQUEST, logInWorker);
 }
 
 function postLogIn(loginRequest) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(loginRequest)
-    };
-    return fetch(loginBaseUrl, requestOptions)
-        .then(response => response.json())
-        .then(data => data)
-    // .then(response => {
-    //     if (response.status === 400) {
-    //         throw response;
-    //     } else {
-    //         response.json().then(json => {
-    //             return json
-    //         })
-    //     }
-    // })
+    return axios.post(loginBaseUrl, loginRequest)
+        .then(response => response.data)
+        .catch(error => { throw error; })
 }
 
 function* logInWorker(action) {
     try {
-        const response = action.loginRequest ? yield call(postLogIn(action.loginRequest)) : false;
-        yield put(loginActions.isUserLoggedInSucceeded(true))
-        yield put(loginActions.logInSucceeded(true))
+        // debugger;
+        // const logIn = yield call(postLogIn(action.loginRequest));
+        // // yield put(loginActions.isUserLoggedInSucceeded(true))
+        // debugger;
+        yield put({ type: loginActions.API_LOGIN_SUCCESS, isUserLoggedIn: true });
+        // const loginSucceededAction = loginActions.logInSucceeded(true);
+        // yield put(loginSucceededAction);
+        // debugger;
+
     } catch (error) {
         yield put(loginActions.logInFailed('Error occured at server'))
     }
